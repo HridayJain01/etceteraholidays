@@ -79,6 +79,84 @@ const TripDetails: React.FC = () => {
     }
   ];
 
+  // Function to format trip details as a quotation
+  const formatQuotationMessage = () => {
+    const highlights = [
+      "Perfect Weather: Mediterranean climate",
+      "Island Hopping: Multiple Greek islands",
+      "Small Groups: Maximum 12 travelers",
+      "Luxury Stays: 4 & 5 star hotels",
+      "Local Cuisine: Authentic Greek dining",
+      "Cultural Tours: Expert local guides"
+    ];
+    const hotels = [
+      {
+        name: "Royal Olympic Hotel",
+        location: "Athens",
+        rating: "5-star",
+        price: "$350/night",
+        amenities: ["Spa", "Pool", "Restaurant", "Gym", "Bar"]
+      },
+      {
+        name: "Santorini Secret",
+        location: "Santorini",
+        rating: "5-star",
+        price: "$450/night",
+        amenities: ["Private Pool", "Sea View", "Restaurant", "Spa", "Bar"]
+      }
+    ];
+    const inclusions = [
+      "All accommodations",
+      "Daily breakfast",
+      "Internal transport",
+      "Expert guides",
+      "Entry fees"
+    ];
+    const documents = [
+      "Valid Passport",
+      "Travel Insurance",
+      "Visa if applicable"
+    ];
+    const itinerary = [
+      "Day 1: Athens Arrival, Acropolis Tour",
+      "Day 2: Athens Food Tour",
+      "Day 3: Ferry to Santorini"
+    ];
+    return (
+      `*Quotation: Greek Islands Adventure*\n` +
+      `\n` +
+      `*Duration:* 10 Days\n` +
+      `*Location:* Greece\n` +
+      `*Group Size:* 12 People\n` +
+      `*Price:* $2,499 per person\n` +
+      `\n` +
+      `*Trip Highlights:*\n` +
+      highlights.map(h => `• ${h}`).join("\n") +
+      `\n\n` +
+      `*Sample Itinerary:*\n` +
+      itinerary.map(i => `• ${i}`).join("\n") +
+      `\n\n` +
+      `*Where You'll Stay:*\n` +
+      hotels.map(h => `• ${h.name} (${h.location}) - ${h.rating}, ${h.price}\n  Amenities: ${h.amenities.join(", ")}`).join("\n") +
+      `\n\n` +
+      `*Inclusions:*\n` +
+      inclusions.map(i => `• ${i}`).join("\n") +
+      `\n\n` +
+      `*Required Documents:*\n` +
+      documents.map(d => `• ${d}`).join("\n") +
+      `\n\n` +
+      `For more details, reply to this message!`
+    );
+  };
+
+  // Handler for Book Now button
+  const handleBookNow = () => {
+    const phone = "9867046701";
+    const message = encodeURIComponent(formatQuotationMessage());
+    const url = `https://wa.me/${phone}?text=${message}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       <div className="relative h-[70vh] overflow-hidden">
@@ -302,7 +380,7 @@ const TripDetails: React.FC = () => {
                   <div className="text-5xl font-bold text-gray-900">$2,499</div>
                   <div className="text-gray-500">per person</div>
                 </div>
-                <button className="w-full bg-blue-600 text-white py-4 px-6 rounded-xl mb-6 hover:bg-blue-700 transition-all font-semibold text-lg shadow-sm hover:shadow-blue-200 hover:shadow-lg flex items-center justify-center gap-2">
+                <button className="w-full bg-blue-600 text-white py-4 px-6 rounded-xl mb-6 hover:bg-blue-700 transition-all font-semibold text-lg shadow-sm hover:shadow-blue-200 hover:shadow-lg flex items-center justify-center gap-2" onClick={handleBookNow}>
                   Book Now
                   <ChevronRight className="w-5 h-5" />
                 </button>
